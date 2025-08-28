@@ -44,22 +44,42 @@ for (let callbtn of callBtns) {
     if (coinQuantity <= 0) {
       return newCart;
     } else {
+      const now = new Date();
+      const time = now.toLocaleTimeString();
+
       newCart.innerHTML = `
     
-               <div class="space-y-3 m-3 p-3">
-                <div class="content-history bg-green-100 rounded-xl p-3">
+               <div class="space-y-3 m-3 p-3 flex justify-between items-center  bg-green-100 rounded-xl ">
+                <div class="content-history py-3 ">
                   <h2 class="card-title">${title}</h2>
                   <p>${phnNumber}</p>
                 </div>
-                
+                <div> <h2> ${time}</h2> </div>
               </div>
-    
+            
     
     
     
     `;
       historyContainer.append(newCart);
     }
+  });
+}
+
+const copyBtns = document.getElementsByClassName("copy-class");
+
+for (let copybtn of copyBtns) {
+  copybtn.addEventListener("click", function () {
+    const phnNumber = copybtn.parentNode.parentNode.children[2].innerText;
+    navigator.clipboard.writeText(phnNumber);
+    alert(`you number is copied ${phnNumber}`);
+
+    const copyId = getElement("count-copy");
+    const copyIdText = copyId.innerText;
+    const copyIdNumber = Number(copyIdText);
+
+    const totalcopy = copyIdNumber + 1;
+    copyId.innerText = totalcopy;
   });
 }
 
